@@ -1,14 +1,15 @@
-import React from 'react';
-import './index.css';
+// import React from 'react';
+// import './index.css';
 
-const ChatMessage = () => {
-    return (
-        <p className="chat_message" >
-            <span className="chat_author">Joost</span>
-            Message here
-            <span className="chat_timeStamp">{new Date().toUTCString()}</span>
-        </p>
-    )
-}
+// const ChatMessage = ({ messages }) => {
+//     return (
+//         <p className="chat_message" >
+//             <span className="chat_author">{message.name}</span>
+//             {message.messages}
+//             <span className="chat_timeStamp">{message.timeStamp}</span>
+//         </p>         
+//     )
+// }
 
-export default ChatMessage
+// export default ChatMessage
+

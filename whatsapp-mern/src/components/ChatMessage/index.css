@@ -7,7 +7,7 @@
     overflow: hidden;
 } */
 
-.chat_message {
+/* .chat_message {
     position: relative;
     font-size: 15px;
     padding: 10px;
@@ -15,22 +15,22 @@
     border-radius: 10px;
     background-color: #fff;
     margin-bottom: 30px;
-}
+} */
 
-.chat_receiver {
+/* .chat_receiver {
     margin-left: auto;
     background-color: #dcf8c6;
-}
+} */
 
 
-.chat_timeStamp {
+/* .chat_timeStamp {
     margin-left: 10px;
     font-size: xx-small;
-}
+} */
 
-.chat_author {
+/* .chat_author {
     position: absolute;
     top: -15px;
     font-weight: 800;
     font-size: xx-small;
-}
+} */
