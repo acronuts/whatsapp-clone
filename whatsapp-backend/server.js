@@ -24,6 +24,7 @@ app.use(cors())
 // Database
 const mongoose = require('mongoose')
 const dbMessages = require('./dbMessages')
+const dbRooms = require('./dbRooms')
 const mongoDB = 'mongodb+srv://admin:W73QmbejCf2zT6C@cluster0.fr173.mongodb.net/whatsappDB?retryWrites=true&w=majority'
 mongoose.connect(mongoDB, {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true})
 
@@ -53,6 +54,7 @@ db.once('open', () => {
 })
 
 const Messages = require('./dbMessages');
+const Rooms = require('./dbRooms')
 
 // API routes
 app.get('/', (req, res) =>{
@@ -73,6 +75,28 @@ app.post('/api/messages/new', (req, res) => {
     const dbMessage = req.body;
 
     Messages.create(dbMessage, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(201).send(data)
+        }
+    })
+})
+
+app.get('/api/rooms', (req, res) => {
+    Rooms.find((err, data) => {
+        if (err) {
+            res.status(500).res.send(data);
+        } else {
+            res.status(200).send(data);
+        }
+    })
+})
+
+app.post('/api/rooms/new', (req, res) => {
+    const dbRoom = req.body;
+
+    Rooms.create(dbRoom, (err, data) =>{
         if (err) {
             res.status(500).send(err);
         } else {

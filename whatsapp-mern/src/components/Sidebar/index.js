@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './index.css'
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import { Avatar, IconButton } from '@material-ui/core';
@@ -8,7 +8,22 @@ import { SearchOutlined } from '@material-ui/icons';
 import myself from '../../assests/images/me.jpg'
 import SidebarChat from '../SidebarChat';
 
-const Sidebar = () => {
+const Sidebar = ({ rooms }) => {
+    // const [input, setInput] = useState('')
+
+    // const sendMessage = async (e) => {
+    //     e.preventDefault()
+
+    //     await axios.post('/api/messages/new', {
+    //         message: input,
+    //         name: 'Me',
+    //         timeStamp: 'Now',
+    //         received: false
+    //     })
+
+    //     setInput('')
+    // };
+
     return (
         <div className='sidebar'>
             <div className="sidebar_header">
@@ -33,9 +48,9 @@ const Sidebar = () => {
             </div>
             <div className="sidebar_chats">
                 <SidebarChat addNewChat />
-                <SidebarChat />
-                <SidebarChat />
-                <SidebarChat />
+                {rooms.map(room => (
+                    <SidebarChat key={room._id} id={room._id} name={room.name}/>
+                ))}
             </div>            
         </div>
     )
