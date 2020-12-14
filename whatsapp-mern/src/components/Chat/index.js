@@ -8,6 +8,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import axios from '../../axios'
 import { useParams } from 'react-router-dom';
+import { useStateValue } from '../../StateProvider';
 
 // import ChatMessage from '../ChatMessage';
 // import chat_message from './index.css'
@@ -17,7 +18,7 @@ const Chat = ({ messages }) => {
     const { roomId } = useParams();
     const [seed, setSeed] = useState('');
     const [roomName, setRoomName] = useState('');
-
+    const [{ user }, dispatch] = useStateValue();
     
     useEffect(() => {
         if (roomId) {
@@ -39,9 +40,9 @@ const Chat = ({ messages }) => {
 
         await axios.post('/api/messages/new', {
             message: input,
-            name: 'Me',
-            timeStamp: 'Now',
-            received: false
+            name: user.displayName,
+            // timeStamp: 'now?',
+            // received: false
         })
 
         setInput('')
@@ -50,7 +51,7 @@ const Chat = ({ messages }) => {
     return (
         <div className="chat">
             <div className="chat_header">
-                <Avatar src={`https://avatars.dicebear.com/4.5/api/avataaars/${seed}.svg`} />
+                <Avatar src={`https://avatars.dicebear.com/4.5/api/avataaars/${seed}.svg`} alt="" />
 
                 <div className="chat_headerInfo">
                     <h3>{roomName.name}</h3>
@@ -71,10 +72,10 @@ const Chat = ({ messages }) => {
             </div>
             <div className="chat_body">
                 {messages.map((message) => (
-                    <p className={`chat_message ${message.received && 'chat_receiver'}`} key={message._id} >
+                    <p className={`chat_message ${message.name === user.displayName && 'chat_receiver'}`} key={message._id} >
                         <span className="chat_author">{message.name}</span>
                         {message.message}
-                        <span className="chat_timeStamp">{message.timeStamp}</span>
+                        <span className="chat_timeStamp">{message._id}</span>
                     </p>    
                 ))}
             </div>

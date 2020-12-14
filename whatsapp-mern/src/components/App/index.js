@@ -5,10 +5,13 @@ import { useEffect, useState } from 'react';
 import Pusher from 'pusher-js';
 import axios from '../../axios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Login from '../Login';
+import { useStateValue } from '../../StateProvider';
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     axios.get('api/messages/sync')
@@ -53,7 +56,10 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app_body">
+      {!user ? (
+        <Login />
+      ) : (
+        <div className="app_body">
         <Router>
           <Sidebar rooms={rooms}/>
           <Switch>
@@ -65,7 +71,9 @@ function App() {
             </Route>
           </Switch>
         </Router>
-      </div>
+        </div>
+      )}
+      
     </div>
   );
 }
